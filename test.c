@@ -43,67 +43,14 @@ struct node *insert(struct node *head_p){
 	return now->next;
 }
 
-/*void text_to_node_client(struct node *head_p){
-	struct node *new=head_p->next;
-	FILE *client_fp;
-	int check;
-	client_fp=fopen("client.txt","r");
-	if(client_fp==NULL)
-		printf("오류 : 파일을 열 수 없습니다.");
-	while(1){
-		check=fscanf(client_fp,"%s | %s | %s | %s | %[^\n]", new->id, new->password, new->name, new->address, new->phone);
-		if(check==EOF)
-			break;
-		new->next=NULL;
-		new->next=insert(head_p);
-		new=new->next;
-	}
-}*/
-
-void text_to_node_client(struct node *head_p){
-	struct node *new = head_p;
-	new->next = NULL;
-	new->next = insert(head_p);
-	char tmp_id[10];
-	char tmp_password[20];
-	char tmp_name[20];
-	char tmp_address[30];
-	char tmp_phone[20];
-	FILE *client_fp;
-	int check;
-	client_fp=fopen("client.txt","a");
-	if(client_fp==NULL)
-		printf("오류 : 파일을 열 수 없습니다");
-	while(1){
-		check = fscanf(client_fp,"%s | %s | %s | %[^|]| %[^\n]",tmp_id, tmp_password, tmp_name, tmp_address, tmp_phone);
-	//getchar();
-	
-		stralloc(new->id,tmp_id);
-		stralloc(new->password,tmp_password);
-		stralloc(new->name,tmp_name);
-		stralloc(new->address,tmp_address);
-		stralloc(new->phone,tmp_phone);
-		if(check==EOF)
-			break;
-		new=new->next;
-	}
-}
+void change_to_node(struct node *haed_p){
+	struct node *now;
+	now->next=head_p;
+	while(now->next==NULL){
+		fscanf
 
 
 
-void client_list(struct node *head_p){
-	struct node *now=head_p->next;
-	FILE *client_fp;
-	client_fp=fopen("client.txt","r");
-	if(client_fp==NULL)
-		printf("오류 : 파일을 열 수 없습니다.");
-	while(1){
-		printf("%s | %s | %s | %s| %s\n", now->id, now->password, now->name, now->address, now->phone);
-		now=now->next;
-   if(now->next->next==NULL)
-	   break;
-	}
-}
 
 
 void sign_up(struct node *head_p){
@@ -151,9 +98,6 @@ void sign_up(struct node *head_p){
 int main(){
 	struct node client;
 	struct node* head = &client;
-	text_to_node_client(&client);
-	printf("여기까지 잘 작동\n");
-	sign_up(head);
-//	client_list(head);
+	sign_up(&client);
 	return 0;
 }

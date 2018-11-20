@@ -98,9 +98,9 @@ void client_list(struct node *head_p){
 	if(client_fp==NULL)
 		printf("오류 : 파일을 열 수 없습니다.");
 	while(1){
-		printf("%s | %s | %s | %s| %s\n", now->id, now->password, now->name, now->address, now->phone);
+		printf("%s | %s | %s | %s | %s\n", now->id, now->password, now->name, now->address, now->phone);
 		now=now->next;
-   if(now->next->next==NULL)
+   if(now->next==NULL)
 	   break;
 	}
 }
@@ -152,8 +152,8 @@ int main(){
 	struct node client;
 	struct node* head = &client;
 	text_to_node_client(&client);
-	printf("여기까지 잘 작동\n");
+	printf("여기까지 잘 작동");
 	sign_up(head);
-//	client_list(head);
+	client_list(head);
 	return 0;
 }

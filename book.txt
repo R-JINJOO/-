@@ -97,4 +97,4 @@
 0000097 | I Think I See the Light Curve | Schwartz | Northwestern University | 9781369448276 | natural | Y
 0000098 | I contain multitudes | Yong | Ecco | 9780062368591 | humanities science | N
 0000099 | I'm OK, I'm pig! | Kim | Tarset | 9781780371023 | somewhere | Y
-0000100 | It's what I do | Addario | Penguin Press | 9781594205378 | natural | N
+0000100 | It's what I do | Addario | Penguin Press | 9781594205378 | natural |N

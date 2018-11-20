@@ -1,11 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct book{
-								char booknum[100];
+								char booknum[8];
 								char bookname[100];
 								char publisher[100];
 								char writer[100];
-								char ISBN[100];
+								char ISBN[14];
 								char place[100];
 								char YorN;
 								struct book *next;

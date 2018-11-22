@@ -5,7 +5,7 @@
 
 typedef struct node{
 	char id[10];
-	char password[20];
+char password[20];
 	char name[10];
 	char address[40];
 	char phone[15];

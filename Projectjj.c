@@ -1,6 +1,6 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<string.h>
-
 int client_menu()
 {
 	system("clear");
@@ -38,7 +38,7 @@ int client_menu()
 	return 0;
 }
 
-int find_book()
+/*int find_book()
 {
    system("clear");
    int a;
@@ -72,4 +72,4 @@ int find_book()
 			}
 		 }
 	  if(a==2)
-
+*/

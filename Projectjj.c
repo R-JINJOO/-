@@ -60,7 +60,7 @@ int find_book()
 		 gets(s);
 		 for(int i=0; i<100 ;i++) //이거 근데 책 권수 바뀌면 100 바뀌니까 define으로 바꿔야 할 텐데
 		 {
-			if(strstr(Book->bookname:s))
+			if(strstr(Book->bookname))
 			{
 				 printf(">> 검색 결과 <<\n");
 				 printf("도서명 : %s\n", Book->bookname);

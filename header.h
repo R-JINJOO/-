@@ -10,7 +10,7 @@ typedef struct book{
 }Book;
 
 typedef struct node{
-								char id[10];
+								char id[15];
 								char password[20];
 								char name[10];
 								char address[40];
@@ -18,8 +18,10 @@ typedef struct node{
 								struct node *next;
 }node;
 
+
 void mygets(char *);
 int menu();
+struct node *insert(struct node*);
 void text_to_node_client(node *);			//텍스트 파일을 구조체로 변환
 void client_list(node *);				//학생 리스트  출력
 void sign_up(node *);				//회원가입

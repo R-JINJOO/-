@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<string.h>
 #include"header.h"
+#define stralloc(x,y) x=(char *)malloc(strlen(y)+1); strcpy(x,y);
+
 void mygets(char *str){
    int i=0;
 
@@ -14,6 +16,60 @@ void mygets(char *str){
 	  i++;
    }
 }
+
+void text_to_node_client(struct node *client_p){
+    node *new=client_p;
+    FILE *client_fp;
+    int check;
+    client_fp=fopen("client.txt","r");
+    if(client_fp==NULL)
+        printf("오류 : 파일을 열 수 없습니다");
+    while(1){
+        check = fscanf(client_fp,"%[^|]|%[^|]|%[^|]|%[^|]|%[^\n]", new->id, new->password, new->name, new->address, new->phone);
+        if(check!=5){
+            new=client_p;
+            while(new->next->next!=NULL){
+                new=new->next;
+            }
+            free(new->next);
+            new->next=NULL;
+            break;
+        }
+        else{
+            new->next=insert(client_p);
+            new=new->next;
+        }
+    }
+    fclose(client_fp);
+}
+
+void client_list(struct node *client_p){ //이거랑 text_to_node랑 다른게 뭐야?
+    struct node *now=client_p;
+    FILE *client_fp;
+    client_fp=fopen("client.txt","r");
+    if(client_fp==NULL)
+        printf("오류 : 파일을 열 수 없습니다.");
+    while(1){
+        printf("%s|%s|%s|%s|%s", now->id, now->password, now->name, now->address, now->phone);
+   if(now->next==NULL)
+       break;
+   else
+       now=now->next;
+    }
+    fclose(client_fp);
+}
+
+struct node *insert(struct node *head_p){
+    struct node *now = head_p; //이건 또 뭐야
+    while(now->next != 0){ //파일 끝이 아닐 떄까지
+        now = now->next; //이건 왜 있는거야?
+    }
+    if(now->next==0){
+        now->next = (struct node *)calloc(sizeof(struct node),1); //이건 왜해주는거야
+    }
+    return now->next;
+}
+
 
 int IntInput(int max){
    int num;
@@ -62,11 +118,12 @@ void text_to_node_book(Book *head_p){         //책의 텍스트 파일을 구�
 
 void client_menu(char *ID,Book *book_hp,node *client_hp){
    int n;
+   struct node tmp; 
    if(book_hp->next==NULL)
 	  printf("C END\n");
 
    while(1)
-   { 
+   {
 	  printf("1번 5번 6번만 됨\n");
 	  printf(">> 회원 메뉴 <<\n");
 	  printf("1. 도서 검색\t\t2. 내 대여 목록\n");
@@ -83,9 +140,35 @@ void client_menu(char *ID,Book *book_hp,node *client_hp){
 			   client_information_modification(ID,client_hp);
 			   else if(n==4)
 			   membership_quit(ID,client_hp);*/
-	  else if(n==3){
-		 printf("수정할 비밀번호, 주소, 전화번호를 새로 입력하세요.\n");
-		 scanf("%s %s %s", );
+	//else if(n==3){
+	//	 printf("수정할 비밀번호, 주소, 전화번호를 새로 입력하세요.\n");
+	//	 printf("비밀 번호 : \n");
+	//	 scanf("%s",tmp.password);
+	//	 printf("주소 : \n");
+	//	 scanf("%s",tmp.address);
+	//	 printf("전화번호 : \n");
+	//	 scanf("%s",tmp.phone);
+	//	 while(client_hp->next != NULL) //내가 로그인한 학번을 기억하고 그 걸 비교하여 찾은 후 수정아 잠만 이게 필요한가? 걍 1로 하면 되는건가?
+	//	 {
+	//		if(strcmp(client_hp->id, /*여기에 내 학번*/) == 0)
+	//		{
+	//		   printf("새 비밀번호 : \n");
+	//		   scanf("%s", client_hp->password); //이거 client_p야 아님 nb? 이거와 97, 99 행
+	//		   printf("새 조소 : \n");
+	//		   getchar();
+	//		   mygets(client_hp->address);
+	//		   printf("새 전화번호 : \n");
+	//		   scanf("%s", client_hp->phone);
+	//		}
+	//		else
+	//		   return //이게 맞나? 난 아니면 그냥 넘어가고 싶은데 break야 아님 이거?
+	//	 }
+	//	 printf("수정되었습니다.\n");
+	  //}
+	  else if(n==4){
+		 //if()
+		 printf("탈퇴하시겠습니까? ");
+	  }
 	  else if(n==5){
 		 printf("\n로그아웃\n");
 		 return;
@@ -94,7 +177,6 @@ void client_menu(char *ID,Book *book_hp,node *client_hp){
 		 printf("프로그램을 종료합니다,");
 		 exit(1);
 	  }
-	  else;
    }
    return;
 }

@@ -168,7 +168,7 @@ void admin_menu(char *ID, Book *book_hp, node*client_hp)
 	  printf("번호를 선택하세요 : ");
 	  n=IntInput(8);
 	  switch(n){
-		 case 1:
+	/*	 case 1:
 			add_book();
 		 case 2:
 			del_book();
@@ -180,7 +180,7 @@ void admin_menu(char *ID, Book *book_hp, node*client_hp)
 			find_book(book_hp);
 		 case 6:
 			client_list_search();
-		 case 7:
+	*/	 case 7:
 			printf("\n로그아웃\n");
 			return;
 		 case 8:
@@ -233,7 +233,7 @@ void bookname_search_for_admin(Book *book_hp){ //관리자- 도서삭제- 도서
    return;
 }
 
-void client_information_modification(cahr *ID,node *client_hp){
+void client_information_modification(char *ID,node *client_hp){
    while(client_hp->next != NULL)
    {
 	  if(strcmp(client_hp->id, /*여기에 내 학번*/) == 0)

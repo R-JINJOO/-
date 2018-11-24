@@ -1,21 +1,21 @@
 typedef struct book{
-								char booknum[15];
-								char bookname[100];
-								char publisher[100];
-								char writer[100];
-								char ISBN[14];
-								char place[100];
-								char YorN;
-								struct book *next;
+   char booknum[15];
+   char bookname[100];
+   char publisher[100];
+   char writer[100];
+   char ISBN[14];
+   char place[100];
+   char YorN;
+   struct book *next;
 }Book;
 
 typedef struct node{
-								char id[15];
-								char password[20];
-								char name[10];
-								char address[40];
-								char phone[15];
-								struct node *next;
+   char id[15];
+   char password[20];
+   char name[10];
+   char address[40];
+   char phone[15];
+   struct node *next;
 }node;
 
 
@@ -25,7 +25,7 @@ struct node *insert(struct node*);
 void text_to_node_client(node *);			//텍스트 파일을 구조체로 변환
 void client_list(node *);				//학생 리스트  출력
 void sign_up(node *);				//회원가입
-								
+
 //***************************회원*************************************************//
 
 void client_menu(char *ID,Book *,node *);				//회원 메뉴
@@ -46,15 +46,15 @@ void client_logout();
 
 
 int strinput(char *str,int num){					//제대로 입력받으면 1return 넘어가면 0return
-								char c;
-								int i=0;
-								while(c=getchar()!='\n'){
-																str[i]=c;
-																i++;
-																if(i==num){
-																								return 1;
-																}
-								}
-								str[i]='\0';
-								return 0;
+   char c;
+   int i=0;
+   while((c=getchar())!='\n'){
+	  str[i]=c;
+	  i++;
+	  if(i==num){
+		 return 1;
+	  }
+   }
+   str[i]='\0';
+   return 0;
 }

@@ -112,7 +112,7 @@ void text_to_node_book(Book *head_p){         //책의 텍스트 파일을 구�
 	  }
 	  new->next=NULL;                     //삭제중...
 	  free(now);                          //삭제끝
-   // now=NULL;
+	  // now=NULL;
    }
    return;
 }
@@ -174,7 +174,87 @@ void client_menu(char *ID,Book *book_hp,node *client_hp){
    return;
 }
 
-void membership_quit(ID,client_hp)
+void admin_menu(char *ID, Book *book_hp, node*client_hp)
+{
+   int n;
+
+   while(1)
+   {
+	  printf(">> 관리자 메뉴 <<\n");
+	  printf("1. 도서 등록\t2. 도서 삭제\n");
+	  printf("3. 도서 대여\t4. 도서 반납\n");
+	  printf("5. 도서 검색\t6. 회원 목록\n");
+	  printf("7. 로그아웃\t8. 프로그램 종료\n");
+	  printf("\n\n");
+	  printf("번호를 선택하세요 : ");
+	  n=IntInput(8);
+	  switch(n){
+		 case 1:
+			add_book();
+		 case 2:
+			del_book();
+		 case 3:
+			borrow_book();
+		 case 4:
+			return_book();
+		 case 5:
+			find_book(book_hp);
+		 case 6:
+			client_list_search();
+		 case 7:
+			printf("\n로그아웃\n");
+			return;
+		 case 8:
+			printf("프로그램을 종료합니다,");
+			exit(1);
+		 default:
+			break;
+	  }
+   }
+}
+void del_book(Book *book_hp)
+{
+   int b;
+   char s[100];
+
+   while(1)
+   {
+	  printf(">> 도서 삭제 <<\n");
+	  printf("1. 도서명 검색\t2. ISBN 검색\n");
+	  printf("\n\n");
+	  printf("검색 번호를 입력하세요 : ");
+	  switch(b){
+		 case 1:
+			bookname_search_for_admin(book_hp);
+			break;
+		 case 2:
+
+	  }
+   }
+}
+
+void bookname_search_for_admin(Book *book_hp){ //관리자- 도서삭제- 도서명 검색
+   char name[50];                             //중복책 검사 >해야함
+   printf("도서명을 입력하세요 : ");//출력화면도 바꿔야함
+   getchar();
+   mygets(name);
+   while(book_hp->next!=NULL){
+	  if(strstr(book_hp->bookname,name)!=NULL){
+		 printf("도서번호 : %s\n",book_hp->booknum);
+		 printf("도서명 : %s\n",book_hp->bookname);
+		 printf("출판사 : %s\n",book_hp->publisher);
+		 printf("저자명 : %s\n",book_hp->writer);
+		 printf("ISBN : %s\n",book_hp->ISBN);
+		 printf("소장처 : %s\n",book_hp->place);
+	  }
+	  else;
+	  book_hp=book_hp->next;
+   }
+   return;
+}
+
+
+void membership_quit(char *ID, node *client_hp)
 {
    FILE *client_fp;
    node *now=client_hp;
@@ -251,7 +331,13 @@ void bookname_search(Book *book_hp){				//검색메뉴1 제목검색 함수
    mygets(name);
    while(book_hp->next!=NULL){
 	  if(strstr(book_hp->bookname,name)!=NULL){
-		 printf("%s|%s|%s|%s|%s|%s|%c\n",book_hp->booknum,book_hp->bookname,book_hp->publisher,book_hp->writer,book_hp->ISBN,book_hp->place,book_hp->YorN);
+		 printf(">> 검색 결과 <<\n");
+		 printf("도서명 : %s\n",book_hp->bookname);
+		 printf("출판사 : %s\n",book_hp->publisher);
+		 printf("저자명 : %s\n",book_hp->writer);
+		 printf("ISBN : %s\n",book_hp->ISBN);
+		 printf("소장처 : %s\n",book_hp->place);
+		 printf("대여가능 여부 : %c\n",book_hp->YorN);
 	  }
 	  else;
 	  book_hp=book_hp->next;
@@ -259,14 +345,14 @@ void bookname_search(Book *book_hp){				//검색메뉴1 제목검색 함수
    return;
 }
 
-
-
 void search_all(Book *book_hp){				//검색메뉴5 전체검색 함수
    while(book_hp->next!=NULL){
 	  printf("%s|%s|%s|%s|%s|%s|%c\n",book_hp->booknum,book_hp->bookname,book_hp->publisher,book_hp->writer,book_hp->ISBN,book_hp->place,book_hp->YorN);
 	  book_hp=book_hp->next;
    }
 }
+
+
 
 int main(){
    Book *book_hp=(Book *)malloc(sizeof(Book));

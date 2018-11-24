@@ -45,3 +45,16 @@ void client_logout();
 //****************************회원**********************************************//
 
 
+int strinput(char *str,int num){					//제대로 입력받으면 1return 넘어가면 0return
+								char c;
+								int i=0;
+								while(c=getchar()!='\n'){
+																str[i]=c;
+																i++;
+																if(i==num){
+																								return 1;
+																}
+								}
+								str[i]='\0';
+								return 0;
+}
